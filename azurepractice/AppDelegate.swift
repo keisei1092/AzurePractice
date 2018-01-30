@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        UNUserNotificationCenter
+            .current()
+            .requestAuthorization(options:[.badge, .alert, .sound]) { granted, _ in
+
+            guard granted else { return }
+            application.registerForRemoteNotifications()
+        }
+
         return true
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // NotificationHubへ登録
+        let hub = SBNotificationHub(
+            connectionString: "Endpoint=sb://...",
+            notificationHubPath: "...")
+        hub?.registerNative(withDeviceToken: deviceToken, tags: nil) { (error) in
+            if (error != nil) {
+                print("Error registering for notifications.", error)
+            } else {
+                print("Success registering for notifications.", deviceToken)
+            }
+        }
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        switch (application.applicationState) {
+        case UIApplicationState.active:
+            let alert = UIAlertController(title: "", message: userInfo.description, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(defaultAction)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        case UIApplicationState.background, UIApplicationState.inactive:
+            print(userInfo.description)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

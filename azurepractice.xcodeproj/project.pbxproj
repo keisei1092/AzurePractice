@@ -14,6 +14,8 @@
 		45FEFAF6201F1C53005761C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45FEFAF4201F1C53005761C1 /* LaunchScreen.storyboard */; };
 		45FEFB01201F1C53005761C1 /* azurepracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FEFB00201F1C53005761C1 /* azurepracticeTests.swift */; };
 		45FEFB0C201F1C53005761C1 /* azurepracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FEFB0B201F1C53005761C1 /* azurepracticeUITests.swift */; };
+		45FEFB1A201F1C65005761C1 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FEFB19201F1C65005761C1 /* WindowsAzureMessaging.framework */; };
+		45FEFB1D201F1C72005761C1 /* hoge.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FEFB1C201F1C72005761C1 /* hoge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,10 @@
 		45FEFB07201F1C53005761C1 /* azurepracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = azurepracticeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FEFB0B201F1C53005761C1 /* azurepracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = azurepracticeUITests.swift; sourceTree = "<group>"; };
 		45FEFB0D201F1C53005761C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45FEFB19201F1C65005761C1 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		45FEFB1B201F1C71005761C1 /* azurepractice-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "azurepractice-Bridging-Header.h"; sourceTree = "<group>"; };
+		45FEFB1C201F1C72005761C1 /* hoge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hoge.m; sourceTree = "<group>"; };
+		45FEFB1E201F2207005761C1 /* azurepractice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = azurepractice.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45FEFB1A201F1C65005761C1 /* WindowsAzureMessaging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +104,16 @@
 		45FEFAEA201F1C53005761C1 /* azurepractice */ = {
 			isa = PBXGroup;
 			children = (
+				45FEFB1E201F2207005761C1 /* azurepractice.entitlements */,
+				45FEFB19201F1C65005761C1 /* WindowsAzureMessaging.framework */,
 				45FEFAEB201F1C53005761C1 /* AppDelegate.swift */,
 				45FEFAED201F1C53005761C1 /* ViewController.swift */,
 				45FEFAEF201F1C53005761C1 /* Main.storyboard */,
 				45FEFAF2201F1C53005761C1 /* Assets.xcassets */,
 				45FEFAF4201F1C53005761C1 /* LaunchScreen.storyboard */,
 				45FEFAF7201F1C53005761C1 /* Info.plist */,
+				45FEFB1C201F1C72005761C1 /* hoge.m */,
+				45FEFB1B201F1C71005761C1 /* azurepractice-Bridging-Header.h */,
 			);
 			path = azurepractice;
 			sourceTree = "<group>";
@@ -194,7 +205,16 @@
 					45FEFAE7201F1C53005761C1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = ZLP777QDS4;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					45FEFAFB201F1C53005761C1 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -263,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45FEFAEE201F1C53005761C1 /* ViewController.swift in Sources */,
+				45FEFB1D201F1C72005761C1 /* hoge.m in Sources */,
 				45FEFAEC201F1C53005761C1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,11 +438,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = azurepractice/azurepractice.entitlements;
 				DEVELOPMENT_TEAM = ZLP777QDS4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/azurepractice",
+				);
 				INFOPLIST_FILE = azurepractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miraitoarumachi.azurepractice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "azurepractice/azurepractice-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -430,11 +459,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = azurepractice/azurepractice.entitlements;
 				DEVELOPMENT_TEAM = ZLP777QDS4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/azurepractice",
+				);
 				INFOPLIST_FILE = azurepractice/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.miraitoarumachi.azurepractice;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "azurepractice/azurepractice-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
